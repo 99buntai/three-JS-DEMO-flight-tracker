@@ -1,0 +1,377 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0c0c1a 0%, #1a1a2e 50%, #16213e 100%);
+    overflow: hidden;
+    height: 100vh;
+    color: white;
+}
+
+#container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Mobile Menu Toggle Button */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none; /* Hidden on desktop */
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.hamburger {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: white;
+    margin: 4px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.menu-toggle.active .hamburger:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle.active .hamburger:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Main UI Panel */
+.ui-panel {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 320px;
+    max-height: calc(100vh - 40px);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: none; /* Hidden on desktop */
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.panel-content {
+    padding: 0 25px 25px;
+}
+
+/* Title */
+.panel-header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #64ffda;
+    white-space: nowrap;
+}
+
+/* Status Section */
+.status-section {
+    margin: 20px 0;
+}
+
+.pin-status, .flight-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-icon {
+    font-size: 1.2rem;
+}
+
+.flight-status {
+    background: rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.3);
+}
+
+/* Controls Section */
+.controls-section {
+    margin: 20px 0;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.clear-btn {
+    background: linear-gradient(45deg, #ff6b6b 0%, #ee5a52 100%);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.clear-btn:hover {
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+}
+
+/* Overlay for mobile */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Loading Screen */
+#loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(12, 12, 26, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    backdrop-filter: blur(5px);
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(100, 255, 218, 0.3);
+    border-top: 4px solid #64ffda;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading p {
+    font-size: 1.2rem;
+    color: #64ffda;
+    font-weight: 600;
+}
+
+/* Canvas positioning */
+canvas {
+    display: block;
+    cursor: crosshair;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* Hide loading when ready */
+.loaded #loading {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .close-btn {
+        display: flex;
+    }
+    
+    .ui-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .ui-panel.active {
+        transform: translateX(0);
+    }
+    
+    .panel-header {
+        padding: 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .panel-content {
+        padding: 25px;
+        overflow-y: auto;
+        height: calc(100% - 80px);
+    }
+    
+    .panel-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .action-btn {
+        padding: 16px 20px;
+        font-size: 1rem;
+    }
+    
+    canvas {
+        cursor: default;
+    }
+}
+
+/* Desktop hover states */
+@media (min-width: 769px) {
+    .ui-panel:hover {
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Smooth transitions */
+* {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Pin hover effects for better UX */
+.pin-hover {
+    cursor: pointer !important;
+}
+
+/* Success animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pin-placed {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* Animated Title */
+.animated-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #64ffda, #00bcd4, #64ffda); /* Repeating gradient for animation */
+    background-size: 200% 200%; /* Control gradient size for animation */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-animation 5s ease infinite, typing-animation 3.5s steps(40, end) 1s 1 normal both, blink-caret .75s step-end infinite;
+    white-space: nowrap; /* Keep title on a single line */
+    overflow: hidden; /* Hide text before typing animation */
+    border-right: .15em solid orange; /* Simulates a typing caret */
+    letter-spacing: .05em;
+    display: inline-block; /* Important for border-right to work correctly */
+}
+
+/* Gradient Animation for Text Color */
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Typing Animation */
+@keyframes typing-animation {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Blinking Caret Animation */
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: orange; }
+} 

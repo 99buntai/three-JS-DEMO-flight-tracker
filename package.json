@@ -1,0 +1,48 @@
+{
+  "name": "3d-globe-flight-tracker",
+  "version": "1.0.0",
+  "description": "Interactive 3D globe application with realistic flight path visualization and airplane animations",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "dev": "npx serve . -p 3000 --live",
+    "build": "echo 'No build step required - static files ready for deployment'",
+    "preview": "npx serve . -p 8080"
+  },
+  "keywords": [
+    "three.js",
+    "3d",
+    "globe",
+    "earth",
+    "flight",
+    "visualization",
+    "webgl",
+    "interactive",
+    "airplane",
+    "travel",
+    "geography",
+    "mapping"
+  ],
+  "author": "3D Globe Flight Tracker",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/3d-globe-flight-tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/3d-globe-flight-tracker/issues"
+  },
+  "homepage": "https://github.com/your-username/3d-globe-flight-tracker#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+} 

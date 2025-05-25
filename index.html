@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Globe Flight Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+</head>
+<body>
+    <div id="container">
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="menu-toggle">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+        </button>
+
+        <!-- Main UI Panel -->
+        <div id="ui-panel" class="ui-panel">
+            <div class="panel-header">
+                <h1>🌍 Globe Flight Tracker</h1>
+                <button id="close-panel" class="close-btn">×</button>
+            </div>
+            
+            <div class="panel-content">
+                <div class="status-section">
+                    <div class="pin-status">
+                        <span class="status-icon">📍</span>
+                        <span id="pin-count">0/2 Pins</span>
+                    </div>
+                    <div class="flight-status" id="flight-status" style="display: none;">
+                        <span class="status-icon">✈️</span>
+                        <span>Flight Path Active</span>
+                    </div>
+                </div>
+
+                <div class="controls-section">
+                    <button id="clear-pins" class="action-btn clear-btn">
+                        <span class="btn-icon">🗑️</span>
+                        Clear Pins
+                    </button>
+                    <button id="toggle-rotation" class="action-btn toggle-btn">
+                        <span class="btn-icon">⏸️</span>
+                        Pause Rotation
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay for mobile when menu is open -->
+        <div id="overlay" class="overlay"></div>
+        
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>Loading Earth...</p>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+    <!-- OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Main application script -->
+    <script src="globe.js"></script>
+</body>
+</html> 
